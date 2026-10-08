@@ -1,0 +1,34 @@
+{
+  "name": "musicnerd",
+  "metadata": {
+    "description": "Music Nerd's agent skills: how the team tracks and ships work, and short videos that get artists to claim their Music Nerd profile."
+  },
+  "owner": {
+    "name": "Music Nerd",
+    "url": "https://musicnerd.net"
+  },
+  "plugins": [
+    {
+      "name": "musicnerd-skills",
+      "source": "./",
+      "description": "Music Nerd's agent skills: how the team tracks and ships work, and short videos that get artists to claim their Music Nerd profile.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Music Nerd",
+        "url": "https://musicnerd.net"
+      },
+      "homepage": "https://musicnerd.net",
+      "repository": "https://github.com/xdjs/MusicNerdSkills",
+      "license": "MIT",
+      "keywords": [
+        "music",
+        "music-nerd",
+        "artists",
+        "agent-skills",
+        "engineering-workflow",
+        "music-marketing"
+      ],
+      "category": "Music"
+    }
+  ]
+}

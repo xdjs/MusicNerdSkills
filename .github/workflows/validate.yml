@@ -1,0 +1,24 @@
+name: validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Portability + manifests + resolver
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Portable Skill Contract lint
+        run: python3 scripts/portability_lint.py
+      - name: Manifest + parity validation
+        run: python3 scripts/validate_manifests.py
+      - name: Resolver reachability (no dark skills)
+        run: python3 scripts/check_resolvable.py
+      - name: Resolver eval (routing fixtures + coverage)
+        run: python3 scripts/run_resolver_eval.py
