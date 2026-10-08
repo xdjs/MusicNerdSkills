@@ -1,6 +1,6 @@
 ---
 name: mn-marketing
-description: 'Make short videos that get artists to claim their Music Nerd profile: announce a shipped feature, highlight an artist who uses Music Nerd, or show how claiming works. Runs the whole slate: pick what to feature from merged PRs and claimed artists, script, $0 drafts, finals, publish through Opus, and measure claims. Use when asked for "Music Nerd marketing", "a video announcing <feature>", "highlight <artist> on Music Nerd", "get more artists to claim", or "this week''s Music Nerd videos". Not for Recoup''s own marketing (that is recoup-internal-marketing, whose video mechanics this skill reuses).'
+description: 'Make short videos that get artists to claim their Music Nerd profile: announce a shipped feature, highlight an artist who uses Music Nerd, or show how claiming works. Runs the whole slate: pick what to feature from merged PRs and claimed artists, script, $0 drafts, finals, publish to Instagram and X, and measure claims. Use when asked for "Music Nerd marketing", "a video announcing <feature>", "highlight <artist> on Music Nerd", "get more artists to claim", or "this week''s Music Nerd videos". Not for Recoup''s own marketing (that is recoup-internal-marketing, whose video mechanics this skill reuses).'
 ---
 
 # Music Nerd marketing
@@ -36,8 +36,13 @@ repo. Tag Music Nerd posts in the log with the arc `Music Nerd`.
 ## Step 2: read the funnel first
 
 One number opens every run: **claims since the last run**. Sources: the admin claims table, and the
-`claim` analytics event (`step: "submitted"`) in Vercel Web Analytics. Then tagged visits by
-`utm_campaign` from the same Vercel project. A visit-to-claim join does not exist yet; say so.
+`claim` analytics event in the web app's Vercel Web Analytics (`/v1/query/web-analytics/events/aggregate`,
+`filter=eventName eq 'claim'`, `by=eventData/step`: `start`, `login_required`, `submitted`; `by=day` for history).
+
+Then visits by platform. **The current Vercel plan does not expose UTM dimensions** (the query returns 402), so
+`utm_campaign` tags are recorded but unreadable; read `by=referrerHostname` instead (`l.instagram.com`, `t.co`,
+`linkedin.com`). Claim events carry no referrer, so there is no visit-to-claim join; say so, and write down the
+claim count on the day of a post as its baseline.
 
 ## Step 3: pick what to feature
 
@@ -61,6 +66,10 @@ Gates before building:
   is "Claimant or admin.", so "only you can tell it to look again." → "claim your profile.").
 - **Consent for a highlight.** The artist has said yes to being featured, and is invited to co-post
   (collaborators widen reach). No consent, no highlight; use the how-to-claim kind instead.
+- **Show the UX that will be live when the post lands.** Before the final render, check open PRs that change the
+  flow on screen (`gh pr list --repo xdjs/MusicNerdWeb --search <feature>`). 2026-10-08: #1465 was removing the
+  "Your page is ready" card while the video showed it; the beat was rebuilt on the profile tour's first card, which
+  is true both before and after that PR ships.
 - **Real numbers only**, from the artist's page or our own data, never estimated for effect.
 - **Why, theirs first:** one sentence on what the artist watching gets, one on what Music Nerd gets.
 
@@ -74,7 +83,10 @@ Same order as `recoup-internal-marketing` Step 4; every stage is a file the owne
    `https://media.skillry.dev/opus-5-5/<slug>/original.mp4`). Pull frame sheets of two or three candidates, pick
    one, and send the owner **its link** with why it fits; build only after the owner approves that reference.
    Approved so far: wustep's Notion "Column permissions" trailer
-   (https://skillry.dev/ai-videos/opus-5-5/wustep-884086) for the text-led UI format.
+   (https://skillry.dev/ai-videos/opus-5-5/wustep-884086) for the text-led UI format; the TV Track iOS launch
+   (https://skillry.dev/ai-videos/opus-5-5/seantiffonnet-675262, 2026-10-08) for the 3D phone format: dark phone,
+   one accent color (our pink), a few-word headline per beat with the key word in pink, things filling in row by
+   row, the phone opening blurred and pulling into focus. Skip its long end card and its typing beats.
 2. **Script**, ~70 words for ~30s, in Music Nerd's voice (lowercase, friendly, speaks to the artist as
    "you"). Hook in 3s. End on the CTA line. The owner approves the on-screen text, and any spoken-only line
    (an end card read aloud), before anything renders.
@@ -116,11 +128,16 @@ no line is split; fixed controls (the Ask button) moved inside that area; a mess
 input above it. The reference project's generator frames every capture this way; add a capture there, not by hand.
 
 **Captures:** iPhone 16 Pro in the browser (3× density), **signed out** so no admin controls show, and never press
-Submit Claim (it files a real claim). **Type:** the renderer cannot load the system font the site uses, so video type
-is Inter. **Captions:** merge spoken URLs and handles back to `musicnerd.net` and `@musicnerdxyz`.
+Submit Claim (it files a real claim). A screen only a claimant sees (the research build after a claim) is filmed on
+**staging**, signed in as that artist's claimant, with every piece of the artist's data replaced by a fictional
+artist: `references/staging-build-capture.md`. **Type:** the renderer cannot
+load the system font the site uses, so video type is Inter. **Captions:** merge spoken URLs and handles back to
+`musicnerd.net` and `@musicnerdnet` (the handle since 2026-10-08; `@musicnerdxyz` no longer exists), and fix the
+brand spelling a transcript gets wrong ("Musicnerd" is "music nerd").
 
-**Reference project:** the first how-to-claim short, in the owner's account workspace
-(`content/mn-claim-howto/`: the themed engine, the 3D phone generator, the captures). Clone it.
+**Reference projects:** in the owner's account workspace, `content/mn-claim-howto/` (the themed engine, the 3D phone
+generator, the captures): `ep1-how-to-claim` (presenter bookends) and `ep2-research-in-place` (2026-10-08, no
+presenter: a real staging build on the phone, owner VO, TV Track style). Clone the closer one.
 
 ## Text-led UI motion graphic (approved 2026-10-05)
 
@@ -149,21 +166,47 @@ project: the docs launch short in the owner's account workspace (`content/mn-doc
 3. **Cut it by word timestamps** from ElevenLabs Scribe (never Whisper), padded 0.1s before and 0.3s after.
 4. **Enhance**: ElevenLabs Voice Isolator on the whole take (rain and construction gone: noise floor -44 → -76 dB),
    then cut, high-pass at 80 Hz, and gain each line to **-20 LUFS** (a quick phone take drifts ~8 dB with distance).
-5. **Mix**: `mix.sh <out.mp4> <line dir>` lays the lines on their marks, ducks the bed, and normalizes to -14 LUFS.
-   Transcribe the final file once to confirm each line lands inside its beat.
+5. **Re-time the picture to the take.** Captions and camera moves are keyed to word timings, and the owner's read
+   runs at a different pace from the reference (2026-10-08: about 1s shorter). Rebuild the composition from the
+   take's Scribe word timings (split a domain Scribe returns as one token, `musicnerd.net`, back into its spoken
+   words so the caption merge still finds it), then re-render the picture.
+6. **Mix**: lay the lines on their marks, duck the bed, and normalize to -14 LUFS (see *Sound* below). Transcribe
+   the final file once to confirm each screen swap lands on the word that names it.
+
+## Sound (Pete, 2026-10-08 R&D)
+
+Pete (a sound designer) heard the 10-06 docs launch short's whooshes as "super loud and jarring". Every video gets
+one dedicated sound pass before render, with the numbers written down:
+
+- **Whooshes are white noise: filter before level.** High-pass at 400 Hz and low-pass at 5 kHz, then set the
+  level. The first try (high-pass 200 Hz, 10-15 dB under the VO) was still too loud; the owner signed off at
+  **cut whooshes ~31 dB and the one bold transition ~26 dB under the VO's momentary peak**.
+- **Taps and pops ~28 dB under the VO peak.** Nothing should jump out on a phone at night.
+- **Music fades out over a long slope** (3-5s, across the end card), never a cut. Fade-ins were fine.
+- Report each hit's momentary loudness against the VO, so the owner can ask for "another 6 dB" precisely.
 
 ## Step 5: publish and measure
 
-- Publish through Opus per `recoup-internal-marketing` → `references/opus.md`, after the owner's go-ahead.
+- **Instagram and X post through the Recoup connectors** from the owner's personal socials (owner, 2026-10-06),
+  after the owner approves the exact copy. Tag `@musicnerdnet`. On X the link goes in the first reply, not the
+  post (X prefixes the reply with the tagged handle). Opus (`recoup-internal-marketing` → `references/opus.md`)
+  remains the route for YouTube and TikTok.
+- **Copy pattern** (the 10-06 and 10-08 posts): a lowercase hook line, one paragraph naming `@musicnerdnet` and what
+  it does for the artist, the CTA line `claim your profile at musicnerd.net`, three hashtags
+  (`#musicnerd #independentartist #musicbusiness`). X: two short paragraphs ending on `@musicnerdnet`.
+- Strict-equality check the posted text against the approved copy, then log it.
 - Link `https://musicnerd.net` (the primary domain since 2026-10-05; `docs.musicnerd.xyz` redirects to the app, so
   link the docs at `musicnerd-docs.vercel.app` until they have a domain) with
   `?utm_source=<yt|tt|ig|x|li>&utm_medium=social&utm_campaign=mn-<slate>-<item>`.
 - Log each post in the account workspace's `posts-log.md` with its kind, the artist (if any) and the why.
-- **~48h re-pull:** views, tagged visits and claims since the post. A written zero is a finding.
+- **~48h re-pull:** views, referrer visits and claims since the post, against the day's baseline. A written zero
+  is a finding.
 
 ## Guardrails
 
 - Nothing publishes without the owner's explicit go-ahead.
-- No feature shown before it is live; no artist shown without consent; no invented UI or data.
+- No feature shown before it is live; no artist shown without consent; no invented UI or data. A real staging
+  build filmed with all artist data replaced by a fictional artist is allowed (owner, 2026-10-08), and the
+  captions need no disclosure line; nothing of the real artist may survive in a kept frame.
 - No private data from the app (emails, unclaimed-artist contact details, admin screens) on screen.
 - Keep account ids and personal paths out of this repo.
