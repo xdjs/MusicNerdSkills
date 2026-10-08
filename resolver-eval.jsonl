@@ -1,0 +1,22 @@
+# Resolver-eval fixtures for Music Nerd Skills.
+# One JSON object per line: {"intent": <user phrasing>, "expected": <skill that owns it>, "not": [<must-not-fire>]}
+# "expected": "none" = the request belongs to no skill in this plugin; its "not" list must not fire.
+# Run: python3 scripts/run_resolver_eval.py
+
+# --- mn-dev ---
+{"intent": "write a tracking issue for the artist claim rework", "expected": "mn-dev"}
+{"intent": "add a row to the PR matrix and log what shipped", "expected": "mn-dev"}
+{"intent": "implement issue #1228", "expected": "mn-dev"}
+{"intent": "preview-test this PR on the Vercel preview", "expected": "mn-dev", "not": ["mn-marketing"]}
+{"intent": "should the research worker go in MusicNerdWeb or MusicNerdAPI", "expected": "mn-dev"}
+
+# --- mn-marketing ---
+{"intent": "make this week's Music Nerd videos", "expected": "mn-marketing"}
+{"intent": "a video announcing the new artist timeline feature on Music Nerd", "expected": "mn-marketing", "not": ["mn-dev"]}
+{"intent": "highlight Dutchyyy on Music Nerd", "expected": "mn-marketing"}
+{"intent": "how do we get more artists to claim their profile", "expected": "mn-marketing"}
+
+# --- not ours ---
+{"intent": "do today's marketing for Recoup", "expected": "none", "not": ["mn-marketing"]}
+{"intent": "draft a LinkedIn post announcing Recoup's new catalog valuation", "expected": "none", "not": ["mn-marketing"]}
+{"intent": "write a tracking issue in the recoupable api repo", "expected": "none", "not": ["mn-dev"]}
