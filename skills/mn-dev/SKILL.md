@@ -1,6 +1,6 @@
 ---
 name: mn-dev
-description: How Music Nerd plans, builds and ships work through GitHub. Two halves — write and maintain a tracking issue (PR matrix, Open→Done closure notes, dated decision callouts), then deliver it (docs first, TDD red→green, one function per file, Vercel preview verification with a documented-vs-observed matrix and screenshots on the PR, merge to main → manual Vercel promotion to production). Use when asked to "write / update the issue", "add a row to the PR matrix", "log what shipped", "implement / ship / build out issue #N", "open PRs for the remaining rows", or "preview-test this PR".
+description: How Music Nerd plans, builds and ships work through GitHub. Two halves — write and maintain a tracking issue (PR matrix, Open→Done closure notes, dated decision callouts), then deliver it (docs first, TDD red→green, one function per file, Vercel preview verification with a documented-vs-observed matrix and screenshots on the PR, merge to main → manual Vercel promotion to production). Every issue carries an owner who signs off, done-when criteria and the customer it impacts; every new issue goes on the GitHub Project for the sprint; every bug gets an issue the moment it is found and is triaged at stand-up; code follows KISS, YAGNI, DRY, single responsibility and open-closed, with no dead code. Use when asked to "write / update the issue", "add a row to the PR matrix", "log what shipped", "implement / ship / build out issue #N", "open PRs for the remaining rows", "preview-test this PR", "file a bug", "triage bugs", "is this done?", or "add it to the board".
 ---
 
 # Music Nerd dev loop: track it, then ship it
@@ -19,10 +19,42 @@ The reference is [xdjs/MusicNerdWeb#1228](https://github.com/xdjs/MusicNerdWeb/i
 - **People.** Pete (product and design, merges), Carl (releases), Sweetman (engineering; call them Sweetman in writing). Any of them can promote a build to production. Attribute decisions to whoever made them and where (standup, R&D sync).
 - **Databases.** Vercel previews and `staging.musicnerd.net` use the **staging** database; production uses its own. The same artist has **different ids** on each. Say which. Dutchyyy on staging has an In Process link and is the usual fixture artist.
 - **Local and preview verification.** When a configured local environment is available, run and review changes locally; respect a requested local review before pushing. Verify the target environment before exercising integrations, preserve existing env files, and keep credentials private. When local configuration is unavailable, use the documented stub-env build to prove compilation. Local checks complement the exact-commit Vercel preview verification below; they do not replace it.
-- **Code shape.** `src/lib` is pure logic grouped by domain (`artist/`, `bio/`, `source/`, `inprocess/`); `src/server/utils` is server I/O under the same grouping. **New modules export one function each, named after the file, with a test beside the folder's other tests.** Older multi-export modules are split when next changed, not in a move. Reviewers ask for this; write it that way from the start.
+- **Code shape.** `src/lib` is pure logic grouped by domain (`artist/`, `bio/`, `source/`, `inprocess/`); `src/server/utils` is server I/O under the same grouping. **New modules export one function each, named after the file, with a test beside the folder's other tests.** Older multi-export modules are split when next changed, not in a move. Reviewers ask for this; write it that way from the start. The principles behind it are under *Code standards* below.
+- **Production data.** Demo on production: it shows what the world sees. But never edit production rows by hand (SQL, an agent on the database) to set up or reset a demo: the code was not written for that state, and a hand reset can leave an artist in one no user could reach. If a demo needs a reset, file an issue for an admin reset feature that defines what a reset touches and its second-order effects, and use that (Carl, 2026-10-15 retro).
 - **Browser verification.** 832 px desktop and 390 px phone (2×, touch), both themes (`localStorage` key `musicnerd-theme` = `light` | `dark`). Screenshots are committed to the existing shared orphan branch `sweetmantech/pr-screenshots` (shared archive, worktree `mnw-shots`; not a contributor-branch naming template) and linked from PR comments by `raw.githubusercontent.com/xdjs/MusicNerdWeb/<sha>/<file>.png`; never on the feature branch.
 - **Logged-in checks.** Previews use Privy email login. Enter the reviewer's email, ask them in chat for the six-digit code (codes expire fast; use the newest), fill the six `code-N` inputs; the page reloads logged in. A first login shows a "Welcome to Music Nerd!" dialog: *Skip for now*. **Never press Submit in the add-link modal on staging**: it files a real review-queue suggestion.
 - **Runtime evidence.** The Vercel MCP `get_runtime_logs` (project `music-nerd`, team `musicnerd`, environment `preview`, filter by status 500) tells you whether a preview 500 is yours or the environment's. A `(EMAXCONNSESSION) max clients reached` cause is the staging Postgres pool, not your PR: reload, note it, move on.
+
+## Done, bugs and the board (2026-10-15 retro)
+
+Shipping got fast enough that defects rose with it. These are the guardrails the team agreed on (Carl proposed them, Pete and Sweetman agreed). Everyone owns this process: if a rule isn't working, raise it or change it.
+
+Every issue carries three fields, in its lead (a tracker) or at the top (a small issue):
+
+```
+**Owner:** Carl — accountable for calling it done; not the developer
+**Done when:** <checkable criteria>
+**Customer:** Sleeve Note (Chris) — who this impacts; tell them when it ships
+```
+
+- **Owner.** The person who signs off. Ideally not the developer: if the developer had the idea, another teammate owns it. When the developer thinks it's done, they demo it to the owner, on a preview or on production, and the owner says done or asks for more. Close only after that sign-off, and record it in the closure note ("Signed off by Carl 2026-10-16 after a demo on production").
+- **Done when.** Acceptance criteria in checkable terms: `**Done when:**` on a small issue, the done-when lines of each Open item on a tracker. An agent works until every criterion is green and says which ones it checked. An issue without them is not ready to build: write them first (Half 1).
+- **Customer.** Who the change impacts: artists claiming a profile, fans on an artist page, an API client such as Sleeve Note, a teammate. Name them so everyone knows who to share it with when it's done. Telling the customer is part of closing the issue.
+- **Done means all of it.** Every done-when green, the owner signed off, merged to `main`, the customer told. Production promotion is still recorded separately.
+- **Every bug gets an issue the moment it is found,** by whoever finds it, with the GitHub issue type **Bug** and the small-issue shape (summary, repro, expected vs actual, suspected file:line, plus the three fields). Found during a demo or a call counts.
+- **Triage new bugs at stand-up,** daily. Each one gets one of two outcomes: **fix it this week** (it gets an owner and goes on the board) or **close it** as not planned, with no PR. Closing is a decision about now, not forever; reopen if it comes back. No growing backlog.
+- **Every new issue goes on the team's GitHub Project** the moment it is opened, and is tracked there for the whole sprint. Sprints run Friday to Thursday. Lanes: **To Do** (signed up for this sprint), **In Progress** (someone is on it), **Done** (meets the bar above). Move an issue to In Progress when you start it and to Done when it closes. Anyone should be able to read the board and know what was promised, what's moving and what's finished. If your `gh` token can't reach the project (`gh auth refresh -s project`), say so and add it in the browser.
+
+## Code standards
+
+Agents write most of the code here, and they read whatever is in the codebase as intended. These rules keep that reading true (Sweetman and Carl, 2026-10-15 retro).
+
+- **KISS.** The simplest thing that meets the done-when. No speculative options, layers or configuration; add them when a real case needs them.
+- **YAGNI, and no dead code.** Delete code that nothing uses: don't comment it out, don't keep it "in case". Git has the history. Bugs grow with the amount of code, and an orphaned component or route looks deliberate to the next agent, which may build on it or bring it back. (On 2026-10-15 an old onboarding popup that was still in the codebase appeared during a production demo.) When a change makes something unused, delete it in the same PR.
+- **Single responsibility.** Each function does one job; each new module exports one function named after its file (see *Code shape*). No monolithic files.
+- **Open-closed.** Add behaviour as a new standalone module that existing code calls, not as a new block inside an existing file. Existing files change by a line or a call, not by growing.
+- **DRY.** Before writing a helper, search `lib/` for one that already does it; reuse or extend it rather than adding a near-copy.
+- **Codify, don't remember.** When a review or a retro agrees on a standard, add it here or to the repo's `AGENTS.md` in the same week, so agents follow it rather than relying on people remembering.
 
 ---
 
@@ -32,7 +64,7 @@ The reference is [xdjs/MusicNerdWeb#1228](https://github.com/xdjs/MusicNerdWeb/i
 
 Sections in this order. Drop what does not apply; never reorder what you keep.
 
-1. **Lead paragraph, no heading.** What this tracks, who asked and where (linked), the current live status. Below it, blockquotes for the **scope note** and any **dated decision callouts**.
+1. **Lead paragraph, no heading.** What this tracks, who asked and where (linked), the current live status, and the **Owner / Done when / Customer** fields (*Done, bugs and the board*). Below it, blockquotes for the **scope note** and any **dated decision callouts**.
 2. **## Goal.** The end state in concrete terms: what a user sees, on which page, from which data. Name files, routes, tables.
 3. **## PRs (updated <ISO date>).** The matrix, directly under Goal.
 4. **## Design** *(when there is one)*. Link the design record and embed its boards. Records live at `docs/rnd/design/<YYYY-MM-DD>-<slug>/` with a README and PNGs. Link to the implementation branch until merge, then to `main`; record the production promotion separately.
@@ -100,8 +132,8 @@ When the plan reverses (the reference went from a standalone section to cards in
 - Link every claim (PR, short SHA, file path, line range). Hard numbers. ISO dates.
 - Time-stamped test results go in **PR comments**; the issue body is the canonical current state (`gh issue edit <n> --body-file <file>` keeps markdown intact).
 - The **title is maintained state**; when scope changes, edit it.
-- Close only when every item is Done, moved to a linked follow-up, or explicitly deferred or declined by the user. For approved deferrals, preserve the original issue link, reason, and dated decision attribution in the archive; an open replacement is not required. Record archival closure as deferred or not planned, never as fixed. Find or create an owning issue before resuming archived work.
-- Smaller issues (a bug, one task): summary, repro, expected vs actual, suspected file:line, done-when. No tracker scaffolding.
+- Close only when the owner has signed off, the customer has been told, and every item is Done, moved to a linked follow-up, or explicitly deferred or declined by the user. For approved deferrals, preserve the original issue link, reason, and dated decision attribution in the archive; an open replacement is not required. Record archival closure as deferred or not planned, never as fixed. Find or create an owning issue before resuming archived work.
+- Smaller issues (a bug, one task): summary, repro, expected vs actual, suspected file:line, and the Owner / Done when / Customer fields. No tracker scaffolding. A bug gets the **Bug** issue type and waits for stand-up triage (*Done, bugs and the board*).
 - Scope to the **change**, not the business outcome: state the context once in the lead, keep every done-when checkable by the implementer.
 
 ---
@@ -122,6 +154,7 @@ Only start from a real spec: Goal, done-when criteria, sequencing, source refere
 9. Triage reviews                  (Codex bot and humans: validate, fix, reply with commit + re-verification)
 10. Re-run 6→8 after EVERY behaviour-changing push
 11. Hand off                       (mark ready on the developer's go; record the main merge, then the production promotion)
+12. Owner sign-off                 (demo to the owner; close on their yes; tell the customer; board → Done)
 ```
 
 ## 1. Read the ground
@@ -201,9 +234,11 @@ Then the captures, hosted on `sweetmantech/pr-screenshots` and linked by SHA. Sc
 
 The Codex bot (`chatgpt-codex-connector`) reviews every PR with P1/P2 findings. **Validate before applying**: some are real (a reused client component keeping stale state across navigation), some overstate (a docs rule the moved code did not yet meet). Fix what is real at its root, reply on the thread with the commit and the re-verification, and re-run 6→8 for that SHA. Human review asks (a missing field the API actually carries, a wrapping chip) get the same treatment: test first, fix, preview, comment.
 
-## 10–11. Hand off
+## 10–12. Hand off and sign-off
 
 When the developer says the PR is good to merge, mark it ready (`gh pr ready <n>`). From then on anyone can merge it.
+
+The issue closes on its owner's sign-off, not on the merge. Demo the change to the owner named in the issue (on the preview before merge, or on production after the promotion). If they ask for more, the issue stays open with the new criteria added. When they say done, write the closure note, record the sign-off, tell the customer it shipped, close the issue and move it to **Done** on the board.
 
 After the squash merge, record the `main` SHA in the issue row. Production is a separate,
 manual step: in Vercel, promote the build for that SHA to production, after applying any
@@ -223,3 +258,6 @@ promotion on the issue. Until someone promotes it, the row says “merged to mai
 - [ ] Every behaviour-changing push re-verified on its own preview.
 - [ ] Reviews triaged on the thread with commit + re-verification.
 - [ ] Main merge and production promotion recorded separately; nothing secret in public text.
+- [ ] Every done-when green, the owner signed off after a demo, the customer told; recorded in the closure note.
+- [ ] Nothing left unused by the change: dead code deleted, not commented out.
+- [ ] Bugs found along the way filed as issues and added to the Project; the issue moved to **Done**.
