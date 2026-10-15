@@ -13,6 +13,7 @@
 | implement / ship / build out issue #N, open PRs for the remaining rows | `mn-dev` |
 | preview-test a PR, documented-vs-observed matrix, merge and promote a release to production | `mn-dev` |
 | which repo does this go in (MusicNerdWeb vs MusicNerdAPI), branch names, draft PRs | `mn-dev` |
+| file a bug, triage bugs at stand-up, acceptance criteria, owner / done when / customer, is this done, the GitHub Project for the sprint, coding standards (KISS, YAGNI, DRY, SRP, OCP, no dead code) | `mn-dev` |
 
 ## marketing: getting artists to claim their profile
 

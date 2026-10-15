@@ -20,3 +20,6 @@
 {"intent": "do today's marketing for Recoup", "expected": "none", "not": ["mn-marketing"]}
 {"intent": "draft a LinkedIn post announcing Recoup's new catalog valuation", "expected": "none", "not": ["mn-marketing"]}
 {"intent": "write a tracking issue in the recoupable api repo", "expected": "none", "not": ["mn-dev"]}
+{"intent": "file a bug for the Latasha page not loading after check for updates", "expected": "mn-dev", "not": ["mn-marketing"]}
+{"intent": "is this feature done? who signs off on it", "expected": "mn-dev", "not": ["mn-marketing"]}
+{"intent": "add this week's issues to the project board", "expected": "mn-dev", "not": ["mn-marketing"]}
