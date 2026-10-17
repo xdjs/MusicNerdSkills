@@ -43,6 +43,7 @@ Every issue carries three fields, in its lead (a tracker) or at the top (a small
 **Customer:** Sleeve Note (Chris) — who this impacts; tell them when it ships
 ```
 
+- **Assign at creation (October 16 standup).** Every new issue must have a GitHub assignee. Assign it to the creating contributor (`gh issue create --assignee @me ...`) unless someone else has explicitly accepted the work; reassign through triage or an agreed handoff. For an agent, use the contributor it represents. The assignee does or coordinates the work; the **Owner** below accepts the result. A body Owner field does not replace GitHub assignment, and assignment does not make the issue a sprint commitment.
 - **Owner.** The person who signs off. Ideally not the developer: if the developer had the idea, another teammate owns it. When the developer thinks it's done, they demo it to the owner, on a preview or on production, and the owner says done or asks for more. Close only after that sign-off, and record it in the closure note ("Signed off by Carl 2026-10-16 after a demo on production").
 - **Done when.** Acceptance criteria in checkable terms: `**Done when:**` on a small issue, the done-when lines of each Open item on a tracker. An agent works until every criterion is green and says which ones it checked. An issue without them is not ready to build: write them first (Half 1).
 - **Customer.** Who the change impacts: artists claiming a profile, fans on an artist page, an API client such as Sleeve Note, a teammate. Name them so everyone knows who to share it with when it's done. Telling the customer is part of closing the issue.
@@ -256,6 +257,7 @@ Release the latest eligible main SHA; do not manually promote an obsolete candid
 ## Checklist before you say "done"
 
 - [ ] PR opened as a draft; marked ready only on its developer's go-ahead.
+- [ ] Every created issue has a GitHub assignee; the acceptance Owner is recorded separately.
 - [ ] Issue was a real spec; matrix row updated the session the PR opened, and again when it merged.
 - [ ] Docs carry the contract and any trade-off; design record has a dated note if the design moved.
 - [ ] Every unit was **red before green**; new modules one-function-per-file with their test.
