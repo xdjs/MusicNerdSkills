@@ -69,7 +69,7 @@ Agents write most of the code here, and they read whatever is in the codebase as
 
 ## Anatomy
 
-Sections in this order. Drop what does not apply; never reorder what you keep.
+Sections in this order. Drop what does not apply; never reorder what you keep. Once a PR exists, **## PRs** always applies.
 
 1. **Lead paragraph, no heading.** What this tracks, who asked and where (linked), the current live status, and the **Owner / Done when / Customer** fields (*Done, bugs and the board*). Below it, blockquotes for the **scope note** and any **dated decision callouts**.
 2. **## Goal.** The end state in concrete terms: what a user sees, on which page, from which data. Name files, routes, tables.
@@ -81,6 +81,8 @@ Sections in this order. Drop what does not apply; never reorder what you keep.
 8. **## Source references.** Originating discussion, key files by path, external APIs, prior art.
 
 ## The PR matrix
+
+**Every issue with a PR has a matrix**, a one-PR bug included: add it in the session the first PR opens if the issue was filed without one. It is how anyone tells at a glance whether the change is open, on `main` or in production.
 
 A merge to `main` is not evidence of production. Record the promotion as its own state.
 
@@ -140,7 +142,7 @@ When the plan reverses (the reference went from a standalone section to cards in
 - Time-stamped test results go in **PR comments**; the issue body is the canonical current state (`gh issue edit <n> --body-file <file>` keeps markdown intact).
 - The **title is maintained state**; when scope changes, edit it.
 - Close only when the owner has signed off, the customer has been told, and every item is Done, moved to a linked follow-up, or explicitly deferred or declined by the user. For approved deferrals, preserve the original issue link, reason, and dated decision attribution in the archive; an open replacement is not required. Record archival closure as deferred or not planned, never as fixed. Find or create an owning issue before resuming archived work.
-- Smaller issues (a bug, one task): summary, repro, expected vs actual, suspected file:line, and the Owner / Done when / Customer fields. No tracker scaffolding. A bug gets the **Bug** issue type and waits for stand-up triage (*Done, bugs and the board*).
+- Smaller issues (a bug, one task): summary, repro, expected vs actual, suspected file:line, and the Owner / Done when / Customer fields. No other tracker scaffolding, but once a PR opens the issue gets the **## PRs** matrix like any other. A bug gets the **Bug** issue type and waits for stand-up triage (*Done, bugs and the board*).
 - Scope to the **change**, not the business outcome: state the context once in the lead, keep every done-when checkable by the implementer.
 
 ---
