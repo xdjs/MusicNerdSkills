@@ -62,6 +62,7 @@ Agents write most of the code here, and they read whatever is in the codebase as
 - **Single responsibility.** Each function does one job; each new module exports one function named after its file (see *Code shape*). No monolithic files.
 - **Open-closed.** Add behaviour as a new standalone module that existing code calls, not as a new block inside an existing file. Existing files change by a line or a call, not by growing.
 - **DRY.** Before writing a helper, search `lib/` for one that already does it; reuse or extend it rather than adding a near-copy.
+- **Short docs descriptions.** OpenAPI endpoint descriptions are 1–3 sentences, 4 at most. Say what the endpoint does and what the caller gets back; omit implementation details, column lists and internal mechanics that the schema and examples already show (Sweetman, 2026-10-20).
 - **Codify, don't remember.** When a review or a retro agrees on a standard, add it here or to the repo's `AGENTS.md` in the same week, so agents follow it rather than relying on people remembering.
 
 ---
