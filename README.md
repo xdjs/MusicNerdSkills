@@ -9,6 +9,8 @@ every skill is a folder under [`skills/`](skills/) with a `SKILL.md`.
 |---|---|
 | [`mn-dev`](skills/mn-dev/SKILL.md) | How Music Nerd plans, builds and ships work: the tracking issue (PR matrix, closure notes, dated decisions) and the delivery loop (docs first, TDD, preview verification, release). |
 | [`mn-marketing`](skills/mn-marketing/SKILL.md) | Short videos that get artists to claim their Music Nerd profile: feature launches, artist highlights, how to claim. Script, $0 draft, final, publish, measure claims. Needs Recoup's `recoup-internal-marketing` skill (`npx skills add recoupable/skills`). |
+| [`mn-feed-fwd-podcast`](skills/mn-feed-fwd-podcast/SKILL.md) | FEED//FWD editing, audio, artwork, episode packaging and handoff in the pilot style. |
+| [`mn-feed-fwd-recap`](skills/mn-feed-fwd-recap/SKILL.md) | Source-backed FEED//FWD articles and companion recaps. |
 
 [`RESOLVER.md`](RESOLVER.md) maps a request to the skill that handles it.
 

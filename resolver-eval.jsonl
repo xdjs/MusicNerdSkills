@@ -23,3 +23,8 @@
 {"intent": "file a bug for the Latasha page not loading after check for updates", "expected": "mn-dev", "not": ["mn-marketing"]}
 {"intent": "is this feature done? who signs off on it", "expected": "mn-dev", "not": ["mn-marketing"]}
 {"intent": "add this week's issues to the project board", "expected": "mn-dev", "not": ["mn-marketing"]}
+
+{"intent": "Edit the FEED//FWD podcast to match our pilot, including lower thirds and music fade", "expected": "mn-feed-fwd-podcast", "not": ["mn-marketing", "mn-feed-fwd-recap"]}
+{"intent": "Make a FEED//FWD episode thumbnail, description and chapters", "expected": "mn-feed-fwd-podcast", "not": ["mn-marketing"]}
+{"intent": "Write a FEED//FWD recap article from this recording in my voice", "expected": "mn-feed-fwd-recap", "not": ["mn-feed-fwd-podcast"]}
+{"intent": "Make a short promo for a newly shipped Music Nerd feature", "expected": "mn-marketing", "not": ["mn-feed-fwd-podcast", "mn-feed-fwd-recap"]}
