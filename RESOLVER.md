@@ -24,6 +24,13 @@
 | highlight an artist who uses Music Nerd | `mn-marketing` |
 | get more artists to claim, show how claiming works, measure claims per post | `mn-marketing` |
 
+## FEED//FWD episodes and recaps
+
+| Intent | Skill |
+|---|---|
+| edit or package a FEED//FWD podcast, match the pilot, fix audio or lower thirds, make episode artwork and description | `mn-feed-fwd-podcast` |
+| write or revise a FEED//FWD session recap or podcast companion article from a recording | `mn-feed-fwd-recap` |
+
 ---
 
 ## Boundaries
@@ -34,3 +41,5 @@
   marketing is Recoup's `recoup-internal-marketing` skill (installed separately with
   `npx skills add recoupable/skills`); `mn-marketing` reuses its video mechanics but never
   runs Recoup's accounts.
+
+- Episode video and packaging use `mn-feed-fwd-podcast`; standalone articles use `mn-feed-fwd-recap`. A shipped-feature promo remains `mn-marketing`.

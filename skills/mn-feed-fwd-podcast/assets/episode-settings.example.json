@@ -1,0 +1,111 @@
+{
+  "episode_id": "REPLACE",
+  "guest_slug": "REPLACE",
+  "canonical_episode_directory": "REPLACE_WITH_EXISTING_EPISODE_FOLDER",
+  "status": "WORKING",
+  "brand_pink": "#FF75D8",
+  "sources": [],
+  "source_to_output_edit_map": [],
+  "format": {
+    "width": null,
+    "height": null,
+    "fps": null,
+    "audio_sample_rate": null
+  },
+  "music": {
+    "source": null,
+    "source_duration_seconds": null,
+    "source_has_baked_fade": null,
+    "intro_start_seconds": null,
+    "first_host_words": null,
+    "first_host_words_output_seconds": null,
+    "dip_start_seconds": null,
+    "dip_end_seconds": null,
+    "gain_before_db": null,
+    "gain_after_db": null,
+    "outro_goodbye_anchor": null,
+    "outro_start_seconds": null,
+    "outro_end_seconds": null,
+    "visual_tail_seconds": null
+  },
+  "verified_handles_and_site": [],
+  "rights_and_credit_ledger": [],
+  "rebuild_dependencies": [],
+  "qc": {
+    "full_decode": false,
+    "visual_review": false,
+    "actual_audio_audition": false,
+    "continuous_review": false
+  },
+  "approval": {
+    "version": null,
+    "scope": null,
+    "source": null
+  },
+  "delivery": {
+    "actual_file": null,
+    "sha256": null,
+    "finder_verified": false,
+    "quicktime_verified": false
+  },
+  "packaging": {
+    "title": {
+      "status": "not_started",
+      "path": null,
+      "based_on_media_sha256": null,
+      "based_on_version": null
+    },
+    "description": {
+      "status": "not_started",
+      "path": null,
+      "based_on_media_sha256": null,
+      "based_on_version": null
+    },
+    "tags": {
+      "status": "not_started",
+      "path": null,
+      "based_on_media_sha256": null,
+      "based_on_version": null
+    },
+    "chapters": {
+      "status": "not_started",
+      "path": null,
+      "based_on_media_sha256": null,
+      "based_on_version": null
+    },
+    "captions": {
+      "status": "not_started",
+      "path": null,
+      "based_on_media_sha256": null,
+      "based_on_version": null
+    },
+    "artwork": {
+      "status": "not_started",
+      "path": null,
+      "based_on_media_sha256": null,
+      "based_on_version": null,
+      "renderer": null,
+      "renderer_state": "not_selected",
+      "formats": [],
+      "source_assets": [],
+      "visual_review": false
+    },
+    "credits": {
+      "status": "not_started",
+      "path": null,
+      "based_on_media_sha256": null,
+      "based_on_version": null
+    },
+    "recap": {
+      "status": "scope_to_confirm",
+      "path": null,
+      "based_on_media_sha256": null,
+      "based_on_version": null
+    },
+    "publishing": {
+      "status": "not_authorized",
+      "destination": null,
+      "receipt": null
+    }
+  }
+}
