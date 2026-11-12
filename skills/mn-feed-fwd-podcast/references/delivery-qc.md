@@ -2,7 +2,7 @@
 
 ## Canonical project and names
 
-Keep the existing series root the existing series root recorded in the episode manifest, with `00_ADMIN`, `01_BRAND`, `02_EPISODES`, `03_DISTRIBUTION`, `04_AUDIO`, `99_ARCHIVE`. Episode folders use an explicit ID and guest slug. Keep originals, prep, working media, edit projects, review exports, approved release deliverables, distribution records and follow-up separated.
+Keep the existing series root recorded in the episode manifest, with `00_ADMIN`, `01_BRAND`, `02_EPISODES`, `03_DISTRIBUTION`, `04_AUDIO`, `99_ARCHIVE`. Episode folders use an explicit ID and guest slug. Keep originals, prep, working media, edit projects, review exports, approved release deliverables, distribution records and follow-up separated.
 
 Use `FEED-FWD_<episode>_<guest>_vNN_<YYYY-MM-DD>_<status>.<ext>` for new outputs. Pilot example: `FEED-FWD_PILOT-001_La-Equis_v23_2026-11-11_APPROVED-REVIEW.mp4`. Source filenames remain unchanged. Version every meaningful change; record what changed and which accepted baseline it used. Review acceptance is not publication permission.
 

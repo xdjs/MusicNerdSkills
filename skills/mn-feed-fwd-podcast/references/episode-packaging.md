@@ -18,7 +18,7 @@ The video and writing form one episode workflow. Keep one episode record and evi
 5. **Captions:** correct speaker names and terms; retime after cuts; check placement/readability and export against final media.
 6. **Credits:** carry required attribution, source/license links and modification notes from the rights ledger and PUBLICATION-CREDITS.txt into the actual public description or allowed public credit location. No silent omission because the video is not monetized.
 7. **Recap, when in scope:** invoke mn-feed-fwd-recap for an accurate article in Pete's voice, verified quotes and selected relevant images. Keep private evidence/uncertainties separate. Do not duplicate the description as a long article or force a speaker-by-speaker template.
-8. **Thumbnails and artwork:** follow [thumbnail-production.md](thumbnail-production.md), which documents the actual Recoup podcast cover generator and the Music Nerd adaptation workflow. Prepare requested 16:9 thumbnails/square covers using approved branding and factual copy; verify rights, typography, crop and mobile legibility. Do not claim the referenced renderer is already installed or Music Nerd-ready.
+8. **Thumbnails and artwork:** follow `references/thumbnail-production.md`, which documents the actual Recoup podcast cover generator and the Music Nerd adaptation workflow. Prepare requested 16:9 thumbnails/square covers using approved branding and factual copy; verify rights, typography, crop and mobile legibility. Do not claim the referenced renderer is already installed or Music Nerd-ready.
 
 ## Files, approvals and completion
 
