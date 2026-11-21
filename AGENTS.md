@@ -17,6 +17,7 @@ a Codex plugin, or with a bare `npx skills add xdjs/MusicNerdSkills`.
 xdjs/MusicNerdSkills/         ← the repo root IS the plugin
 ├── skills/
 │   ├── mn-dev/               ← tracking issues, PR matrix, TDD, preview verification, release
+│   ├── mn-board/             ← sharing issues and PRs on the team's Vercel Board
 │   └── mn-marketing/         ← short videos that get artists to claim their profile
 ├── RESOLVER.md               ← routing table (request → one skill)
 ├── resolver-eval.jsonl       ← routing fixtures

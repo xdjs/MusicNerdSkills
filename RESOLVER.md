@@ -14,7 +14,13 @@
 | preview-test a PR, documented-vs-observed matrix, merge and promote a release to production | `mn-dev` |
 | which repo does this go in (MusicNerdWeb vs MusicNerdAPI), branch names, draft PRs | `mn-dev` |
 | file a bug, triage bugs at stand-up, acceptance criteria, owner / done when / customer, is this done, the GitHub Project for the sprint, coding standards (KISS, YAGNI, DRY, SRP, OCP, no dead code) | `mn-dev` |
-| post an issue or PR to the Vercel Board, update the code-review thread | `mn-dev` |
+
+## board: sharing work with the team
+
+| Intent | Skill |
+|---|---|
+| post an issue or PR to the Vercel Board, update the code-review thread, post a preview test or a shipped message there | `mn-board` |
+| connect an agent to the board, claim or complete a board task, what's on the board | `mn-board` |
 
 ## marketing: getting artists to claim their profile
 
@@ -36,6 +42,8 @@
 
 ## Boundaries
 
+- **GitHub Project vs Vercel Board.** Adding an issue to the GitHub Project (Todo / In Progress / Done lanes)
+  → `mn-dev`. Posting to the team's Vercel Board (`code-review`, `tasks`) → `mn-board`.
 - **Building vs announcing.** Shipping the feature (issue, PRs, preview, release) → `mn-dev`.
   The video that announces it once it is live → `mn-marketing`.
 - **Music Nerd vs Recoup.** `mn-marketing` is only for Music Nerd posts. Recoup's own daily
