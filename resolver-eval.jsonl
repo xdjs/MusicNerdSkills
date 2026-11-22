@@ -10,6 +10,12 @@
 {"intent": "preview-test this PR on the Vercel preview", "expected": "mn-dev", "not": ["mn-marketing"]}
 {"intent": "should the research worker go in MusicNerdWeb or MusicNerdAPI", "expected": "mn-dev"}
 
+# --- mn-board ---
+{"intent": "post this PR to the board", "expected": "mn-board", "not": ["mn-dev"]}
+{"intent": "post this PR to the code-review channel on the board", "expected": "mn-board", "not": ["mn-dev"]}
+{"intent": "post the preview test for this PR in the issue's board thread", "expected": "mn-board", "not": ["mn-dev"]}
+{"intent": "claim the board task for this row", "expected": "mn-board"}
+
 # --- mn-marketing ---
 {"intent": "make this week's Music Nerd videos", "expected": "mn-marketing"}
 {"intent": "a video announcing the new artist timeline feature on Music Nerd", "expected": "mn-marketing", "not": ["mn-dev"]}
@@ -28,3 +34,5 @@
 {"intent": "Make a FEED//FWD episode thumbnail, description and chapters", "expected": "mn-feed-fwd-podcast", "not": ["mn-marketing"]}
 {"intent": "Write a FEED//FWD recap article from this recording in my voice", "expected": "mn-feed-fwd-recap", "not": ["mn-feed-fwd-podcast"]}
 {"intent": "Make a short promo for a newly shipped Music Nerd feature", "expected": "mn-marketing", "not": ["mn-feed-fwd-podcast", "mn-feed-fwd-recap"]}
+{"intent": "record Sweetman's decision in the board task thread before you build it", "expected": "mn-board", "not": ["mn-dev"]}
+{"intent": "wrap up the issue on the board: finish its tasks and post that it's closed", "expected": "mn-board", "not": ["mn-dev"]}

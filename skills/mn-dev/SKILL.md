@@ -56,6 +56,10 @@ Every issue carries three fields, in its lead (a tracker) or at the top (a small
 
 - **Weekly aging review (October 29 R&D).** Review issues older than seven days against current PRs, decisions and evidence. Record completed, explicitly deferred/not planned, or keep open with a finite remaining action and accountable contributor. Age alone is not grounds for closure. Preserve failed/unscored results and archived history; do not create replacement issues for work the user declined.
 
+## Share issues and PRs on the Vercel Board
+
+Load the `mn-board` skill alongside this one. It owns how agents post issues and PRs to the team's Vercel Board: one `code-review` thread per issue, each matrix row a task in `tasks`, a reply at each step below.
+
 
 ## Code standards
 
@@ -108,6 +112,8 @@ A merge to `main` is not evidence of production. Record the promotion as its own
 - Below the table, an **order** blockquote when sequence matters; rewrite it as *what happened* once it has (for example, which PRs a production promotion included).
 
 **Update a row in the same session its PR changes state.** Replace `#TBD` the moment the PR opens. A stale row misleads everyone who trusts the matrix.
+
+**Mirror the matrix on the board.** Each row is a task in the board's `tasks` channel and the issue's `code-review` thread root mirrors the matrix (`mn-board`). Add the task when you add the row, and move it in the same pass as the row's state.
 
 ## Open → Done
 
@@ -205,7 +211,7 @@ The stub build proves compilation, not integrations. Never write those values to
 
 Open it with `gh pr create --draft`. It stays a draft through steps 6–10.
 
-PR body: what changes and why, in the user's terms; trade-offs you are introducing (a read moved inside a Suspense boundary, a cache TTL); what was verified locally; "preview verification follows in a comment". Base `main`. Link the issue. **Replace the `#TBD` row on the issue in the same session.**
+PR body: what changes and why, in the user's terms; trade-offs you are introducing (a read moved inside a Suspense boundary, a cache TTL); what was verified locally; "preview verification follows in a comment". Base `main`. Link the issue. **Replace the `#TBD` row on the issue in the same session.** Add the PR to the issue's board thread in the same pass (`mn-board`).
 
 ## 6. Find the preview for your SHA
 
@@ -245,6 +251,8 @@ Preview: <url>. Staging database. 832 px and 390 px, both themes.
 
 Then the captures, hosted on `sweetmantech/pr-screenshots` and linked by SHA. Screenshots are **required** for UI PRs; prose alone does not pass review here. Say what you did **not** exercise and why.
 
+Post the same test to the board: one reply per PR per tested SHA in the issue's `code-review` thread, with the screenshots attached (`mn-board`).
+
 ## 9. Reviews
 
 The Codex bot (`chatgpt-codex-connector`) reviews every PR with P1/P2 findings. **Validate before applying**: some are real (a reused client component keeping stale state across navigation), some overstate (a docs rule the moved code did not yet meet). Fix what is real at its root, reply on the thread with the commit and the re-verification, and re-run 6→8 for that SHA. Human review asks (a missing field the API actually carries, a wrapping chip) get the same treatment: test first, fix, preview, comment.
@@ -259,6 +267,8 @@ After the squash merge, record the `main` SHA in the issue row. Follow the Web r
 
 Release the latest eligible main SHA; do not manually promote an obsolete candidate or a preview/staging artifact. Until production assignment and verification succeed, report the actual state (merged, staging validated, awaiting approval or release failed), never “in production”. Other repositories follow their own release runbooks.
 
+On merge, complete the row's board task; once production shows the change, strike the PR through in the board thread's root and post the shipped message (`mn-board`).
+
 ## Checklist before you say "done"
 
 - [ ] PR opened as a draft; marked ready only on its developer's go-ahead.
@@ -272,6 +282,7 @@ Release the latest eligible main SHA; do not manually promote an obsolete candid
 - [ ] Every behaviour-changing push re-verified on its own preview.
 - [ ] Reviews triaged on the thread with commit + re-verification.
 - [ ] Main merge and production promotion recorded separately; nothing secret in public text.
+- [ ] Board kept current: the row's task moved, one reply per PR state change and per tested SHA, the shipped post after production (`mn-board`).
 - [ ] Every done-when green, the owner signed off after a demo, the customer told; recorded in the closure note.
 - [ ] Nothing left unused by the change: dead code deleted, not commented out.
 - [ ] Bugs found along the way filed for triage; accepted sprint work added to the Project; completed sprint work moved to **Done**.
