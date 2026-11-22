@@ -10,8 +10,9 @@ their history up to 2026-10-08 lives there. MusicNerdWeb refers to them by name,
 
 ## Structure
 
-The repo **is one flat plugin**, rooted at the repo root. It installs as a Claude/agents marketplace plugin,
-a Codex plugin, or with a bare `npx skills add xdjs/MusicNerdSkills`.
+The repo **is one flat plugin**, `musicnerd`, rooted at the repo root: the team skills plus the Music Nerd MCP
+server. It installs as a Claude Code, Codex or Cursor plugin (steps at https://docs.musicnerd.net/plugin), or,
+skills only, with a bare `npx skills add xdjs/MusicNerdSkills`.
 
 ```text
 xdjs/MusicNerdSkills/         ← the repo root IS the plugin
@@ -29,8 +30,9 @@ xdjs/MusicNerdSkills/         ← the repo root IS the plugin
 └── AGENTS.md                 ← this file (CLAUDE.md symlinks here)
 ```
 
-A skill may carry its own `references/`, `scripts/`, `templates/` and `fixtures/`. There are no shared root
-folders, agents, MCP servers or hooks; add them only when a skill needs them.
+A skill may carry its own `references/`, `scripts/`, `templates/` and `fixtures/`. The one shared root file is
+`.mcp.json`: Claude Code reads it by default, and the Codex and Cursor manifests point at it. There are no
+agents or hooks; add them only when a skill needs them.
 
 **Prerequisite, not a dependency:** `mn-marketing` builds on Recoup's `recoup-internal-marketing` skill for the
 shared video mechanics. Install it separately with `npx skills add recoupable/skills`. Nothing from it is
@@ -78,8 +80,9 @@ description: What it does, when to use it, and the phrases a user would say.
 1. Create `skills/mn-<name>/SKILL.md`.
 2. Add a row in `RESOLVER.md` and at least one positive fixture in `resolver-eval.jsonl` (plus a `not` case
    for the nearest neighbour).
-3. Keep the version in sync across `.claude-plugin/plugin.json`, `.codex-plugin/plugin.json` and both
-   `marketplace.json` files (the two marketplaces must agree on name, source and version).
+3. Keep the version in sync across the three `plugin.json` files (`.claude-plugin/`, `.codex-plugin/`,
+   `.cursor-plugin/`) and both `marketplace.json` files (the two marketplaces must agree on name, source and
+   version). Bump it when the plugin changes, or installed copies stay on the old version.
 4. Run the gates. All four must exit 0; CI runs them on every PR and push to `main`:
 
 ```bash
