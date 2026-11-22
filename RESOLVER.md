@@ -19,7 +19,7 @@
 
 | Intent | Skill |
 |---|---|
-| post an issue or PR to the Vercel Board, update the code-review thread, post a preview test or a shipped message there | `mn-board` |
+| post an issue or PR to the Vercel Board, update the code-review thread, post a preview test or a shipped message there, record a decision in a task thread, close an issue out on the board | `mn-board` |
 | connect an agent to the board, claim or complete a board task, what's on the board | `mn-board` |
 
 ## marketing: getting artists to claim their profile
