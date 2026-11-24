@@ -1,12 +1,12 @@
 {
-  "name": "musicnerd-skills",
-  "version": "0.1.0",
-  "description": "Music Nerd's agent skills: how the team tracks and ships work, and short videos that get artists to claim their Music Nerd profile.",
+  "name": "musicnerd",
+  "version": "0.2.0",
+  "description": "Music Nerd's team plugin: the skills the team uses to ship and market Music Nerd, plus the Music Nerd MCP server (artists, links and the team board).",
   "author": {
     "name": "Music Nerd",
     "url": "https://musicnerd.net"
   },
-  "homepage": "https://musicnerd.net",
+  "homepage": "https://docs.musicnerd.net/plugin",
   "repository": "https://github.com/xdjs/MusicNerdSkills",
   "license": "MIT",
   "keywords": [
@@ -15,13 +15,15 @@
     "artists",
     "agent-skills",
     "engineering-workflow",
-    "music-marketing"
+    "music-marketing",
+    "mcp"
   ],
   "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
   "interface": {
-    "displayName": "Music Nerd Skills",
-    "shortDescription": "How Music Nerd ships work and markets artist profile claims",
-    "longDescription": "Music Nerd's agent skills: how the team tracks and ships work, and short videos that get artists to claim their Music Nerd profile.",
+    "displayName": "Music Nerd",
+    "shortDescription": "Music Nerd's team skills and MCP server",
+    "longDescription": "Music Nerd's team plugin: the skills the team uses to ship and market Music Nerd, plus the Music Nerd MCP server (artists, links and the team board).",
     "developerName": "Music Nerd",
     "category": "Music",
     "capabilities": [

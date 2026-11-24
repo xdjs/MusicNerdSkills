@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "musicnerd": {
+      "type": "http",
+      "url": "https://api.musicnerd.net/mcp"
+    }
+  }
+}

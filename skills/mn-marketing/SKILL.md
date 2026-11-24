@@ -195,8 +195,7 @@ one dedicated sound pass before render, with the numbers written down:
   it does for the artist, the CTA line `claim your profile at musicnerd.net`, three hashtags
   (`#musicnerd #independentartist #musicbusiness`). X: two short paragraphs ending on `@musicnerdnet`.
 - Strict-equality check the posted text against the approved copy, then log it.
-- Link `https://musicnerd.net` (the primary domain since 2026-10-05; `docs.musicnerd.xyz` redirects to the app, so
-  link the docs at `musicnerd-docs.vercel.app` until they have a domain) with
+- Link `https://musicnerd.net` (the primary domain since 2026-10-05; link the docs at `docs.musicnerd.net`) with
   `?utm_source=<yt|tt|ig|x|li>&utm_medium=social&utm_campaign=mn-<slate>-<item>`.
 - Log each post in the account workspace's `posts-log.md` with its kind, the artist (if any) and the why.
 - **~48h re-pull:** views, referrer visits and claims since the post, against the day's baseline. A written zero

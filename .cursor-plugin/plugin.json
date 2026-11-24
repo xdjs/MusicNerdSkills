@@ -1,0 +1,23 @@
+{
+  "name": "musicnerd",
+  "displayName": "Music Nerd",
+  "version": "0.2.0",
+  "description": "Music Nerd's team plugin: the skills the team uses to ship and market Music Nerd, plus the Music Nerd MCP server (artists, links and the team board).",
+  "author": {
+    "name": "Music Nerd"
+  },
+  "homepage": "https://docs.musicnerd.net/plugin",
+  "repository": "https://github.com/xdjs/MusicNerdSkills",
+  "license": "MIT",
+  "keywords": [
+    "music",
+    "music-nerd",
+    "artists",
+    "agent-skills",
+    "engineering-workflow",
+    "music-marketing",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json"
+}

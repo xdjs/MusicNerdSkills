@@ -1,7 +1,8 @@
-# Music Nerd Skills
+# Music Nerd plugin
 
-Agent skills for building and marketing [Music Nerd](https://musicnerd.net). The repo root is one plugin;
-every skill is a folder under [`skills/`](skills/) with a `SKILL.md`.
+The `musicnerd` plugin for the Music Nerd team: the agent skills we use to build and market
+[Music Nerd](https://musicnerd.net), plus the Music Nerd MCP server (`https://api.musicnerd.net/mcp`). The repo
+root is one plugin; every skill is a folder under [`skills/`](skills/) with a `SKILL.md`.
 
 ## What's inside
 
@@ -17,26 +18,30 @@ every skill is a folder under [`skills/`](skills/) with a `SKILL.md`.
 
 ## Install
 
-### npx (any agent)
+Install steps for Claude Code, Codex and Cursor, and how to sign in to the MCP server, are at
+[docs.musicnerd.net/plugin](https://docs.musicnerd.net/plugin). In Claude Code:
+
+```bash
+claude plugin install musicnerd --marketplace xdjs/MusicNerdSkills
+```
+
+The plugin's MCP server signs in with your Music Nerd account (OAuth); there is no API key.
+
+Skills only, for any agent:
 
 ```bash
 npx skills add xdjs/MusicNerdSkills
 ```
 
-This puts the skills where your agent loads them (`.agents/skills/`, `.claude/skills/`, and so on).
+## Layout
 
-### Claude Code
-
-```bash
-/plugin marketplace add xdjs/MusicNerdSkills
-/plugin install musicnerd-skills@musicnerd
-```
-
-### Codex and other hosts
-
-Install this repository through the host's plugin marketplace or local-plugin flow. The Codex manifest is
-`.codex-plugin/plugin.json`; the agents registry is `.agents/plugins/marketplace.json`. No MCP server or API
-key is bundled.
+| Path | For |
+|---|---|
+| `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json` | Claude Code |
+| `.codex-plugin/plugin.json`, `.agents/plugins/marketplace.json` | Codex |
+| `.cursor-plugin/plugin.json` | Cursor |
+| `.mcp.json` | The `musicnerd` MCP server, shared by all three |
+| `skills/` | The skills, shared by all three |
 
 ## Contributing
 
